@@ -1,23 +1,30 @@
 /*Constants*/
-const byte ledPin = 13;
-const byte clapPin = 2;
-const int debounceTime = 70;
-const int clapTime = 600;
-/*Functions*/
+const byte ledPin = 13;         /*Led is attached on pin 13*/
+const byte clapPin = 2;         /*Sensor is attached on pin 2*/
+const int debounceTime = 70;    /*Debounce time: 50-100ms*/
+const int clapTime = 600;       /*Time between two claps*/
 
 
 
-/*Setup*/
+/** Setup
+ * Initializes pins and attach interrupt function.
+ *
+*/
 void setup() {
-  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);  
   pinMode(clapPin, INPUT);
   attachInterrupt(digitalPinToInterrupt(clapPin), clap, RISING);
 }
 
+/**Loop
+ *
+ */
 void loop() {
-
 }
 
+/** clap() 
+ *  Interrupt function. 
+ */
 void clap() {
    static unsigned long last_interrupt_time = 0;
    static unsigned long first_interrupt_time = 0;
