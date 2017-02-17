@@ -1,7 +1,7 @@
 /*Constants*/
 const byte ledPin = 13;
 const byte clapPin = 2;
-const int interval = 50;
+const int debounceTime = 100;
 
 /*Functions*/
 
@@ -19,8 +19,14 @@ void loop() {
 }
 
 void clap() {
-  toggleLight();
-  delayMicroseconds(100000);
+   static unsigned long last_interrupt_time = 0;
+    unsigned long interrupt_time = millis();
+    // If interrupts come faster than 200ms, assume it's a bounce and ignore
+    if (interrupt_time - last_interrupt_time > debounceTime) 
+    {
+      toggleLight();
+    }
+ last_interrupt_time = interrupt_time;
 }
 
  
